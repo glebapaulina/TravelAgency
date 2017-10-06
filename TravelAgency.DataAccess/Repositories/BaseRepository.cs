@@ -30,22 +30,23 @@ namespace TravelAgency.DataAccess.Repositories
             return Context.Set<TEntity>().ToList();
         }
 
-        public void Add(TEntity entity)
+        public int Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
-            Context.SaveChanges();
+            return Context.SaveChanges();
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
+        public int AddRange(IEnumerable<TEntity> entities)
         {
             Context.Set<TEntity>().AddRange(entities);
-            Context.SaveChanges();
+            return Context.SaveChanges();
         }
 
-        public void Remove(TEntity entity)
+        public int Remove(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);
-            Context.SaveChanges();
+            return Context.SaveChanges();
+            
         }
 
     }

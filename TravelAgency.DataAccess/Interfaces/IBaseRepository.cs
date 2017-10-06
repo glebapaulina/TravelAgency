@@ -12,10 +12,10 @@ namespace TravelAgency.DataAccess.Interfaces
     {
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
-        void Add(TEntity entity);
-        void AddRange(IEnumerable<TEntity> entities);
+        int Add(TEntity entity);
+        int AddRange(IEnumerable<TEntity> entities);
 
-        void Remove(TEntity entity);
+        int Remove(TEntity entity);
        
        
     }

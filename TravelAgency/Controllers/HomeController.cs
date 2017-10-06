@@ -29,13 +29,7 @@ namespace TravelAgency.Controllers
 
         public ActionResult Index()
         {
-          
-                    
-            ObjectResult<CountryViewModel> del = _countryService.Remove(2);
-            ObjectResult<CountryViewModel> country = _countryService.Get(2);
-            IEnumerable<CountryViewModel> countries = _countryService.GetAll();
-            ObjectResult<CountryViewModel> adee = _countryService.Get(3);
-
+            _countryService.GetAll();
             return View();
         }
 

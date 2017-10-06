@@ -10,11 +10,14 @@ namespace TravelAgency.DataAccess.Models
     public class Rating
     {
         public int Id { get; set; }
+
+        [Required]
         public int Value { get; set; }
 
-        [StringLength(1000)]
+        [Required, StringLength(1000)]
         public string Comment { get; set; }
 
+        [Required]
         public DateTime Date { get; set; }
 
         [Required]

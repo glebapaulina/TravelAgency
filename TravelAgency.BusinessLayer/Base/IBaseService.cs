@@ -12,9 +12,9 @@ namespace TravelAgency.BusinessLayer.Base
     public interface IBaseService<TEntity, TViewModel>     
     {
         ObjectResult<TViewModel> Get(int id);
-        IEnumerable<TViewModel> GetAll();
-        void Add(TViewModel viewModel);
-        void AddRange(IEnumerable<TViewModel> viewModels);
+        ObjectResult<IEnumerable<TViewModel>> GetAll();
+        ObjectResult<TViewModel> Add(TViewModel viewModel);
+        ObjectResult<IEnumerable<TViewModel>> AddRange(IEnumerable<TViewModel> viewModels);
         ObjectResult<TViewModel> Remove(int entity);
 
     }

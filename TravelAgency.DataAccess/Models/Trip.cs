@@ -17,11 +17,23 @@ namespace TravelAgency.DataAccess.Models
 
         [Required]
         public string Description { get; set; }
+
+        [Required]
         public int Capacity { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
+
+        [Required]
         public DateTime StartDate { get; set; }
+
+        [Required]
         public DateTime EndDate { get; set; }
+
+        [Required]
         public virtual Status Status { get; set; }
+
+        [Required]
         public virtual  City City { get; set; }
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }

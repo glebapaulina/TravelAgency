@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.DataAccess.Interfaces;
+using TravelAgency.DataAccess.Repositories;
 
 namespace TravelAgency.BusinessLayer.Base
 {
@@ -22,38 +23,39 @@ namespace TravelAgency.BusinessLayer.Base
             _repository = repository;
         }   
 
-        public IEnumerable<TViewModel> GetAll()
-        {        
-            return Mapper.Map<IEnumerable<TViewModel>>(_repository.GetAll());
+        public ObjectResult<IEnumerable<TViewModel>> GetAll()
+        {           
+            return new ObjectResult<IEnumerable<TViewModel>>( Mapper.Map<IEnumerable<TViewModel>>(_repository.GetAll()));
         }
 
         public ObjectResult<TViewModel> Get(int id)
         {
             var result = _repository.Get(id);
-            if (result == null)
-                return new ObjectResult<TViewModel>();
-            return new ObjectResult<TViewModel>(Mapper.Map<TViewModel>(result));
-
+            return result == null ? new ObjectResult<TViewModel>() : new ObjectResult<TViewModel>(Mapper.Map<TViewModel>(result));
         }
           
-        public void Add(TViewModel viewModel)
+        public ObjectResult<TViewModel> Add(TViewModel viewModel)
         {
-            _repository.Add(Mapper.Map<TEntity>(viewModel));
+            var result = Mapper.Map<TEntity>(viewModel);
+            if (_repository.Add(result) == 1)
+                return new ObjectResult<TViewModel>(Mapper.Map<TViewModel>(result));
+            return new ObjectResult<TViewModel>();
         }
 
-        public void AddRange(IEnumerable<TViewModel> viewModels)
+        public ObjectResult<IEnumerable<TViewModel>> AddRange(IEnumerable<TViewModel> viewModels)
         {
-            _repository.AddRange(Mapper.Map<IEnumerable<TEntity>>(viewModels));
+            var result = Mapper.Map<IEnumerable<TEntity>>(viewModels);
+            if(_repository.AddRange(result) == 1)
+                return new ObjectResult<IEnumerable<TViewModel>>(viewModels);
+            return new ObjectResult<IEnumerable<TViewModel>>();
         }
 
         public ObjectResult<TViewModel> Remove(int id)
         {
             var result = _repository.Get(id);
-            if(result == null)
-                return new ObjectResult<TViewModel>();
-            _repository.Remove(result);
-          
-            return new ObjectResult<TViewModel>(Mapper.Map<TViewModel>(result));
+            if (_repository.Remove(result)==1)
+                return new ObjectResult<TViewModel>(Mapper.Map<TViewModel>(result));
+            return new ObjectResult<TViewModel>();
         }
 
       

@@ -68,6 +68,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.0\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -109,8 +110,21 @@
     <Compile Include="Country\ICountryService.cs" />
     <Compile Include="ObjectResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rating\IRatingService.cs" />
+    <Compile Include="Rating\RatingService.cs" />
+    <Compile Include="Status\IStatusService.cs" />
+    <Compile Include="Status\StatusService.cs" />
+    <Compile Include="Transporter\ITransporterService.cs" />
+    <Compile Include="Transporter\TransporterService.cs" />
+    <Compile Include="Trip\ITripService.cs" />
+    <Compile Include="Trip\TripService.cs" />
+    <Compile Include="ViewModels\ApplicationUserViewModel.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\RatingViewModel.cs" />
+    <Compile Include="ViewModels\StatusViewModel.cs" />
+    <Compile Include="ViewModels\TransporterViewModel.cs" />
+    <Compile Include="ViewModels\TripViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelAgency.DataAccess\TravelAgency.DataAccess.csproj">
@@ -122,6 +136,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

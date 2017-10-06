@@ -9,9 +9,9 @@ using TravelAgency.DataAccess.Models;
 
 namespace TravelAgency.DataAccess.Repositories
 {
-    public class CitiesRepository : BaseRepository<City>, ICityRepository
+    public class CityRepository : BaseRepository<City>, ICityRepository
     {
-        public CitiesRepository(ApplicationDbContext context)
+        public CityRepository(ApplicationDbContext context)
             :base(context)
         {
             

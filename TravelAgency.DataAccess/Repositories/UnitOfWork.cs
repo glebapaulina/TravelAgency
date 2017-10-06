@@ -23,7 +23,7 @@ namespace TravelAgency.DataAccess.Repositories
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
-            Cities = new CitiesRepository(context);
+            Cities = new CityRepository(context);
             Countries = new CountryRepository(context);
             Statuses = new StatusRepository(context);
             Ratings = new RatingRepository(context);

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Reflection;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using log4net;
+using Autofac.Integration.WebApi;
+using TravelAgency.App_Start;
 using TravelAgency.BusinessLayer.Country;
-using TravelAgency.DataAccess.Context;
-using TravelAgency.DataAccess.Interfaces;
-using TravelAgency.DataAccess.Models;
-using TravelAgency.DataAccess.Repositories;
+using TravelAgency.Controllers.Api;
+using TravelAgency.DataAccess;
 
-namespace TravelAgency.App_Start
+namespace TravelAgency
 {
     public class IoCConfig
     {
@@ -20,24 +16,19 @@ namespace TravelAgency.App_Start
         {
 
             var builder = new ContainerBuilder();
-           
-
+            //builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            //builder.RegisterControllers(typeof(TripsController).Assembly);
+            //builder.RegisterApiControllers(typeof(TripsController).Assembly);
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<ApplicationDbContext>().InstancePerLifetimeScope();
 
-            builder.RegisterTypes()
-                .Where(t => t.Name.EndsWith("Repository"))
-                .AsImplementedInterfaces()
-                .InstancePerRequest();
+         
 
-            //builder.RegisterTypes()
-            //    .Where(t => t.Name.EndsWith("Service"))
-            //    .AsImplementedInterfaces()
-            //    .InstancePerRequest();
 
-            builder.RegisterType<CountryRepository>().As<ICountryRepository>().InstancePerRequest();
-            builder.RegisterType<CountryService>().As<ICountryService>().InstancePerRequest();
+            builder.RegisterModule(new BussinessLayerAutofacModule());
+            builder.RegisterModule(new DataAccessAutofacModule());
             builder.RegisterModule(new AutofacLoggingModule());
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterApiControllers(typeof(TripsController).Assembly);
             var container = builder.Build();
           
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
